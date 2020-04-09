@@ -12,11 +12,38 @@ The app is best viewed on mobile. Vist the link and add the PWA to your homescre
 
 The electronic version of your favorite party game, Monikers!
 
-## To Run
+## To Setup
+
+Window #1 - Backend
 
     > git clone https://github.com/daughedm/monikers.git
     > cd monikers
     > npm install
+
+Window #2 - Frontend
+
+    > cd monikers/client
+    > npm install
+
+Window #3 - Database
+
+    > cd monikers
+    > mkdir -p postgres/data
+    > docker run --name postgres -p 5432:5432 -v $PWD/postgres/data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres -it postgres
+    > psql -h localhost  -U postgres -W -c 'create database monikers'
+    > This will prompt you for the password:  postgres
+    > npm install knex -g
+    > knex migrate:latest
+    > knex seed:run
+
+## To Run
+
+Window #1 - Frontend
+
+    > npm start
+
+Window #2 - Backend
+
     > npm start
     > visit http://localhost:3000/
 
@@ -34,6 +61,7 @@ The electronic version of your favorite party game, Monikers!
 
 ## Technologies
 
+- Docker
 - React
 - Redux
 - Node
